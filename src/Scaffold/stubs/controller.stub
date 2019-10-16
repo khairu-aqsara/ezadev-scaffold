@@ -1,0 +1,81 @@
+<?php
+
+namespace DummyNamespace;
+
+use DummyModelNamespace;
+use App\Http\Controllers\Controller;
+use Ezadev\Admin\Controllers\HasResourceActions;
+use Ezadev\Admin\Form;
+use Ezadev\Admin\Grid;
+use Ezadev\Admin\Layout\Content;
+use Ezadev\Admin\Show;
+
+class DummyClass extends Controller
+{
+    use HasResourceActions;
+
+    public function index(Content $content)
+    {
+        return $content
+            ->header('Index')
+            ->description('description')
+            ->body($this->grid());
+    }
+
+    public function show($id, Content $content)
+    {
+        return $content
+            ->header('Detail')
+            ->description('description')
+            ->body($this->detail($id));
+    }
+
+    public function edit($id, Content $content)
+    {
+        return $content
+            ->header('Edit')
+            ->description('description')
+            ->body($this->form()->edit($id));
+    }
+
+    public function create(Content $content)
+    {
+        return $content
+            ->header('Create')
+            ->description('description')
+            ->body($this->form());
+    }
+
+    protected function grid()
+    {
+        $grid = new Grid(new DummyModel);
+
+        $grid->id('ID');
+        $grid->created_at('Created at');
+        $grid->updated_at('Updated at');
+
+        return $grid;
+    }
+
+    protected function detail($id)
+    {
+        $show = new Show(DummyModel::findOrFail($id));
+
+        $show->id('ID');
+        $show->created_at('Created at');
+        $show->updated_at('Updated at');
+
+        return $show;
+    }
+
+    protected function form()
+    {
+        $form = new Form(new DummyModel);
+
+        $form->display('ID');
+        $form->display('Created at');
+        $form->display('Updated at');
+
+        return $form;
+    }
+}

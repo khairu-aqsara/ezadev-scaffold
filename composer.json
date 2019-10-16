@@ -1,0 +1,30 @@
+{
+    "name": "ezadev/scaffolding",
+    "description": "Admin Scaffolding For Ezadev Admin Packages",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Khairu Aqsara Sudirman",
+            "email": "khairu.aqsara@hotmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "ezadev/admin": "^0.5.4"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Ezadev\\Admin\\Scaffold\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ezadev\\Admin\\Scaffold\\ScaffoldServiceProvider"
+            ]
+        }
+    }
+}
